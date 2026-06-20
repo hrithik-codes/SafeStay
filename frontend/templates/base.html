@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}SafeStay — Book Safe, Stay Safe{% endblock %}</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#13171C',
+          paper: '#F7F5F0',
+          verified: '#1A7A4C',
+          caution: '#C17817',
+          danger: '#B3261E',
+          hivis: '#F2C200',
+        },
+        fontFamily: {
+          stencil: ['Barlow Condensed', 'sans-serif'],
+          display: ['Archivo Black', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+</head>
+<body class="bg-paper text-ink">
+
+<div class="hazard-stripe"></div>
+
+<header class="bg-ink text-paper sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5 group">
+      <div class="w-9 h-9 bg-hivis rounded-sm flex items-center justify-center flex-shrink-0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#13171C" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6l-8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      </div>
+      <span class="font-stencil font-bold text-2xl tracking-wide uppercase">SafeStay</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 font-stencil uppercase text-sm font-semibold tracking-wide">
+      <a href="/" class="hover:text-hivis transition">Search</a>
+      <a href="/map" class="hover:text-hivis transition">Safety Map</a>
+      <a href="#how-it-works" class="hover:text-hivis transition">How Scoring Works</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-2 text-xs font-mono opacity-70">
+      <span class="w-2 h-2 rounded-full bg-verified inline-block"></span>
+      Inspired by Delhi fire safety review
+    </div>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer class="bg-ink text-paper/70 mt-16">
+  <div class="hazard-stripe"></div>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-10 grid md:grid-cols-3 gap-8 text-sm">
+    <div>
+      <div class="font-stencil uppercase text-paper font-bold text-lg mb-2">SafeStay</div>
+      <p class="leading-relaxed">A hackathon project built around one rule: a hotel that fails fire and structural safety checks cannot be booked through this platform — no matter the price or rating.</p>
+    </div>
+    <div>
+      <div class="eyebrow mb-2" style="color:#F2C200; opacity:0.85;">Why this exists</div>
+      <p class="leading-relaxed">Built in response to recent hotel fire incidents in Delhi, where missing fire NOCs and blocked emergency exits cost lives. Safety data shown here is demo data for hackathon purposes.</p>
+    </div>
+    <div>
+      <div class="eyebrow mb-2" style="color:#F2C200; opacity:0.85;">Demo disclaimer</div>
+      <p class="leading-relaxed">Hotel names, certificates, and scores are simulated for this prototype and do not reflect real properties or real government records.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/icons.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

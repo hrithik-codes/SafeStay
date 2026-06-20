@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-5 md:px-8 py-6">
+  <a href="/" class="inline-flex items-center gap-1.5 text-sm font-mono font-semibold text-ink/60 hover:text-ink">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Back to search
+  </a>
+</div>
+
+<div id="hotel-root" class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+  <div class="animate-pulse">
+    <div class="h-8 w-1/3 skeleton rounded mb-3"></div>
+    <div class="h-56 w-full skeleton rounded mb-6"></div>
+  </div>
+</div>
+
+<!-- BLOCKED BOOKING MODAL -->
+<div id="blocked-modal" class="hidden fixed inset-0 bg-ink/70 z-[1000] items-center justify-center p-4">
+  <div class="bg-paper rounded-sm max-w-lg w-full p-6 md:p-8 relative border-t-8 border-danger">
+    <button id="close-modal" class="absolute top-4 right-4 text-ink/40 hover:text-ink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="stamp stamp-unsafe mb-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </div>
+    <h3 class="font-stencil uppercase font-bold text-2xl mb-2">Booking blocked</h3>
+    <p class="text-ink/70 mb-4">This property has failed mandatory safety checks and cannot be booked through SafeStay:</p>
+    <ul id="modal-failed-list" class="space-y-1.5 mb-5 text-sm"></ul>
+    <p class="text-sm text-ink/60 mb-5">We've found nearby properties that pass every mandatory check — scroll down to view them, or:</p>
+    <button id="scroll-to-alts" class="btn btn-primary w-full">See safe alternatives nearby</button>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>const HOTEL_ID = {{ hotel_id }};</script>
+<script src="{{ url_for('static', filename='js/hotel.js') }}"></script>
+{% endblock %}

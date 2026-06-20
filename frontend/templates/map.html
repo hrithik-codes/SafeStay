@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-5 md:px-8 py-6">
+  <div class="flex items-start justify-between flex-wrap gap-4">
+    <div>
+      <h1 class="font-stencil uppercase font-bold text-3xl md:text-4xl">Safety Map</h1>
+      <p class="text-ink/60 mt-1 max-w-xl">Every pin is colour-coded by inspection outcome. A badge marks hotels holding a valid Fire NOC + structural safety certificate.</p>
+    </div>
+    <select id="map-traveller-select" class="border border-ink/15 rounded-sm px-3 py-2.5 text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-hivis">
+      <option value="">General safety score</option>
+      <option value="solo_female">Solo Female Traveller</option>
+      <option value="solo_male">Solo Traveller</option>
+      <option value="family">Family</option>
+      <option value="group">Group</option>
+      <option value="child">Travelling with Children</option>
+    </select>
+  </div>
+
+  <!-- Legend -->
+  <div class="flex flex-wrap gap-4 mt-5 mb-4 text-sm">
+    <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full inline-block" style="background:var(--verified)"></span>Verified (75+)</span>
+    <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full inline-block" style="background:var(--caution)"></span>Caution (55–74)</span>
+    <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full inline-block" style="background:var(--danger)"></span>Unsafe / Blocked</span>
+    <span class="inline-flex items-center gap-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" class="w-4 h-4"><path d="M12 2 4 6v6c0 5 4 8 8 10 4-2 8-5 8-10V6l-8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      Certified (NOC + structural cert)
+    </span>
+  </div>
+
+  <div id="map" class="rounded-sm overflow-hidden border border-line" style="height: 580px; z-index:0;"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

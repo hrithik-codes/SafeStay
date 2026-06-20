@@ -1,0 +1,284 @@
+/* ============================================================
+   SafeStay — Design tokens & base styles
+   Aesthetic: safety inspection placard / compliance certificate.
+   Not a generic travel-site look — feels like a building safety
+   report given a usable, modern shell.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* Base */
+  --ink: #13171C;
+  --ink-soft: #20262E;
+  --paper: #F7F5F0;
+  --paper-dim: #ECE8DD;
+  --line: #D8D2C2;
+
+  /* Safety signal triad */
+  --verified: #1A7A4C;
+  --verified-bg: #E5F3EA;
+  --caution: #C17817;
+  --caution-bg: #FBEEDC;
+  --danger: #B3261E;
+  --danger-bg: #FBE7E5;
+
+  /* Accent — hi-vis safety yellow, used sparingly */
+  --hivis: #F2C200;
+  --hivis-ink: #3A2E00;
+
+  /* Type */
+  --font-display: 'Archivo Black', sans-serif;
+  --font-stencil: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--hivis); color: var(--ink); }
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--hivis);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Stencil / placard typography ---------- */
+
+.stencil {
+  font-family: var(--font-stencil);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.65;
+}
+
+/* ---------- Hazard stripe (signature motif) ---------- */
+
+.hazard-stripe {
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--ink) 0, var(--ink) 10px,
+    var(--hivis) 10px, var(--hivis) 20px
+  );
+}
+
+/* ---------- Safety stamp seal (signature element) ---------- */
+
+.stamp {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.stamp::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px dashed currentColor;
+  opacity: 0.5;
+}
+
+.stamp-verified { background: var(--verified-bg); color: var(--verified); }
+.stamp-caution  { background: var(--caution-bg);  color: var(--caution); }
+.stamp-unsafe   { background: var(--danger-bg);   color: var(--danger); }
+
+.stamp svg { width: 28px; height: 28px; }
+
+.stamp-sm { width: 40px; height: 40px; }
+.stamp-sm svg { width: 18px; height: 18px; }
+
+/* ---------- Tier pill ---------- */
+
+.tier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tier-verified { background: var(--verified-bg); color: var(--verified); }
+.tier-caution  { background: var(--caution-bg);  color: var(--caution); }
+.tier-unsafe   { background: var(--danger-bg);   color: var(--danger); }
+
+.tier-pill .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  font-family: var(--font-stencil);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--hivis);
+  box-shadow: 3px 3px 0 var(--hivis);
+}
+.btn-primary:hover { box-shadow: 1px 1px 0 var(--hivis); transform: translate(2px, 2px); }
+
+.btn-block {
+  background: var(--paper-dim);
+  color: var(--danger);
+  border: 2px solid var(--danger);
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+.btn-sm { padding: 8px 14px; font-size: 0.8rem; }
+
+/* ---------- Card ---------- */
+
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card-tag-verified { border-left: 4px solid var(--verified); }
+.card-tag-caution  { border-left: 4px solid var(--caution); }
+.card-tag-unsafe   { border-left: 4px solid var(--danger); position: relative; }
+
+.card-tag-unsafe::after {
+  content: 'BOOKING BLOCKED';
+  position: absolute;
+  top: 14px;
+  right: -34px;
+  background: var(--danger);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 38px;
+  transform: rotate(45deg);
+}
+
+/* ---------- Checklist rows ---------- */
+
+.check-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.92rem;
+}
+.check-row:last-child { border-bottom: none; }
+
+.check-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.check-pass { color: var(--verified); }
+.check-fail { color: var(--danger); }
+
+/* ---------- Scrollbar (subtle) ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Score gauge ring ---------- */
+
+.gauge {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.gauge svg { transform: rotate(-90deg); }
+.gauge-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+}
+
+/* ---------- Leaflet popup overrides ---------- */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+}
+.leaflet-popup-content { margin: 12px 14px; }
+
+/* ---------- Tier filter buttons ---------- */
+.tier-filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Utility ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--paper-dim) 25%, #f0ede4 50%, var(--paper-dim) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
