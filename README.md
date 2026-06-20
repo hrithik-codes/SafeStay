@@ -71,14 +71,6 @@ frontend/
   static/js/        app.js (search/listing), hotel.js (detail + booking gate), map.js (Leaflet)
 ```
 
-## Demo script suggestion (for judges)
-1. Show the homepage — point out the live count: "X pass mandatory checks, Y blocked."
-2. Switch "Travelling as" to **Solo Female Traveller** — show the ranking and scores change.
-3. Click into a **caution-tier** hotel — show the full inspection-style checklist.
-4. Click into a hotel tagged **Unsafe** — try to book it. Show the blocked modal with the
-   exact failed checks, then scroll to "Safer Alternatives Nearby."
-5. Open `/map` — show the colour-coded pins and the certification badge.
-
 ## Notes
 - All hotel names, certificates, and safety data are **simulated for this demo** and do not
   represent real properties or government records.
